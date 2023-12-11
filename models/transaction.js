@@ -18,7 +18,7 @@ class Transaction {
 
   async checkTransactionPerDay(order_id) {
     const twentyFourHoursAgo = new Date();
-    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24);
+    twentyFourHoursAgo.setHours(twentyFourHoursAgo.getHours() - 24); //checking last 24 hours transaction with assumsion each transaction have a expire 24 hour from time post transaction
     let filter = {
       createdAt: {
         gte: twentyFourHoursAgo,

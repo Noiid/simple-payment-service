@@ -3,7 +3,7 @@ const applyMiddleware = require("./middleware");
 const trxRoutes = require("./routes/transaction");
 const cron = require("node-cron");
 const checkTransactionRoutine = require("./controllers/transaction/getTransactionRoutine");
-const { ENABLE_CRON } = require("./config/config");
+const { ENABLE_CRON, INTERVAL_INQUIRY } = require("./config/config");
 
 const app = express();
 
@@ -16,7 +16,9 @@ app.get("/", (req, res) => {
 });
 
 if (ENABLE_CRON == "true") {
-  cron.schedule("* * * * *", checkTransactionRoutine);
+  cron.schedule(INTERVAL_INQUIRY, () => {
+    checkTransactionRoutine();
+  });
 }
 
 app.listen(3000, () => {

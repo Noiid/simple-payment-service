@@ -20,11 +20,17 @@ const checkStatusByOrderID = async (order_id) => {
   }
 };
 
-const checkTransactionRoutine = async () => {
+const checkTransactionRoutine = async (order_id) => {
   const newTransaction = new Transaction(prisma);
   const newProduct = new Product(prisma);
   try {
-    const listTransaction = await newTransaction.checkTransactionPerDay();
+    let listTransaction;
+    if (typeof order_id !== "undefined") {
+      listTransaction = await newTransaction.checkTransactionPerDay(order_id);
+    } else {
+      listTransaction = await newTransaction.checkTransactionPerDay();
+    }
+
     for (const element of listTransaction) {
       const [isProcess, status] = await checkStatusByOrderID(element.billCode);
       if (isProcess) {
