@@ -58,6 +58,25 @@ class Transaction {
       },
     });
   }
+
+  async allTransaction(limit, page) {
+    const skip = (page - 1) * limit;
+    const data = await this.prisma.transaction.findMany({
+      take: parseInt(limit),
+      skip: skip,
+    });
+
+    const resultCount = await this.prisma.transaction.count();
+
+    const totalPage = Math.ceil(resultCount / limit);
+
+    return {
+      data: data,
+      current_page: page - 0,
+      total_page: totalPage,
+      total_data: resultCount,
+    };
+  }
 }
 
 module.exports = Transaction;
