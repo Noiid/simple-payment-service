@@ -64,6 +64,10 @@ class Transaction {
     const data = await this.prisma.transaction.findMany({
       take: parseInt(limit),
       skip: skip,
+      include: {
+        user: true,
+        product: true,
+      },
     });
 
     const resultCount = await this.prisma.transaction.count();

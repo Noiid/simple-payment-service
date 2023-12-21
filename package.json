@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@img/sharp-win32-x64": "^0.33.0",
     "@prisma/client": "^5.3.1",
     "chai": "^4.3.8",
     "chai-http": "^4.4.0",
@@ -15,9 +16,11 @@
     "memory-cache": "^0.2.0",
     "mocha": "^10.2.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "node-cron": "^3.0.3",
     "nodemon": "^3.0.2",
-    "prisma": "^5.3.1"
+    "prisma": "^5.3.1",
+    "sharp": "^0.33.0"
   },
   "scripts": {
     "start": "nodemon app.js",
